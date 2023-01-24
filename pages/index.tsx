@@ -1,7 +1,11 @@
 import { PageLayout } from "@/components/PageLayouts";
 import Head from "next/head";
+import useSWR from "swr";
+import { fetcher } from "@/utils/api";
 
 export default function Home() {
+  const { data, error, isLoading } = useSWR("/data", fetcher);
+
   return (
     <>
       <Head>
@@ -10,7 +14,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <PageLayout>Hello world</PageLayout>
+      <PageLayout>hello</PageLayout>
     </>
   );
 }
