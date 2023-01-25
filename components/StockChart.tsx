@@ -39,6 +39,7 @@ export const StockChart: FC<Props> = ({ data, isLoading, error }) => {
   // TODO: memoize data since there's only two datasets
   const chartData = isLoading || !data ? emptyData : transformStockData(data);
 
+  // TODO: add label in chart
   //TODO: handle error
   return <BarChart data={chartData} options={defaultOptions} />;
 };

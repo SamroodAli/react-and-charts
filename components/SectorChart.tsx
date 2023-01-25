@@ -5,6 +5,7 @@ import { StocksData } from "@/apis/exampleData";
 import { transformSectorData } from "@/utils/stockChart";
 import { DoughnutChart } from "@/components/DoughnutChart";
 
+// TODO: redundant data, refactor this
 const defaultOptions: ChartOptions<"doughnut"> = {
   responsive: true,
   backgroundColor: "red",
@@ -40,6 +41,7 @@ export const SectorChart: FC<Props> = ({ data, isLoading, error }) => {
   // TODO: memoize data since there's only two datasets
   const chartData = isLoading || !data ? emptyData : transformSectorData(data);
 
+  // TODO: add label in chart
   //TODO: handle error
   return <DoughnutChart data={chartData} options={defaultOptions} />;
 };

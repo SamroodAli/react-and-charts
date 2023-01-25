@@ -17,3 +17,5 @@ export default function Home() {
     </>
   );
 }
+
+//TODO: server side render this page
