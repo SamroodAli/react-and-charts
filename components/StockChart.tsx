@@ -30,14 +30,14 @@ const emptyData: ChartData<"bar"> = {
 };
 
 interface Props {
-  data: StocksData;
+  data?: StocksData;
   isLoading: boolean;
   error: boolean;
 }
 
 export const StockChart: FC<Props> = ({ data, isLoading, error }) => {
   // TODO: memoize data since there's only two datasets
-  const chartData = isLoading ? emptyData : transformData(data);
+  const chartData = isLoading || !data ? emptyData : transformData(data);
 
   return <BarChart data={chartData} options={defaultOptions} />;
 };
