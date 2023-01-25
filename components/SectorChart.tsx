@@ -2,9 +2,10 @@ import { BarChart } from "@/components/BarChart";
 import { ChartData, ChartOptions } from "chart.js";
 import { FC } from "react";
 import { StocksData } from "@/apis/exampleData";
-import { transformStockData } from "@/utils/stockChart";
+import { transformSectorData } from "@/utils/stockChart";
+import { DoughnutChart } from "@/components/DoughnutChart";
 
-const defaultOptions: ChartOptions<"bar"> = {
+const defaultOptions: ChartOptions<"doughnut"> = {
   responsive: true,
   backgroundColor: "red",
   plugins: {
@@ -19,7 +20,7 @@ const defaultOptions: ChartOptions<"bar"> = {
   },
 };
 
-const emptyData: ChartData<"bar"> = {
+const emptyData: ChartData<"doughnut"> = {
   labels: [],
   datasets: [
     {
@@ -35,10 +36,10 @@ interface Props {
   error: boolean;
 }
 
-export const StockChart: FC<Props> = ({ data, isLoading, error }) => {
+export const SectorChart: FC<Props> = ({ data, isLoading, error }) => {
   // TODO: memoize data since there's only two datasets
-  const chartData = isLoading || !data ? emptyData : transformStockData(data);
+  const chartData = isLoading || !data ? emptyData : transformSectorData(data);
 
   //TODO: handle error
-  return <BarChart data={chartData} options={defaultOptions} />;
+  return <DoughnutChart data={chartData} options={defaultOptions} />;
 };

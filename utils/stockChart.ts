@@ -25,7 +25,7 @@ const BORDER_COLORS = [
  * @param stocks: Stocks data from example data api response.
  * Transform data from stocks array to bar chart's data format.
  */
-export function transformData(stocksData: StocksData): ChartData<"bar"> {
+export function transformStockData(stocksData: StocksData): ChartData<"bar"> {
   const chartData: ChartData<"bar"> = {
     datasets: [
       {
@@ -39,5 +39,40 @@ export function transformData(stocksData: StocksData): ChartData<"bar"> {
     labels: stocksData.stocks.map((stock) => stock.ticker),
   };
 
+  return chartData;
+}
+
+/**
+ * @param stocks: Stocks data from example data api response.
+ * Transform data from stocks array to bar chart's data format.
+ */
+export function transformSectorData(
+  stocksData: StocksData
+): ChartData<"doughnut"> {
+  // sector data of the type Record<sectorName, stocksInSector>)
+  const sectorData: Record<string, number> = stocksData.stocks.reduce(
+    (sectors, stock) => {
+      sectors[stock.sector] = (sectors[stock.sector] || 0) + 1;
+
+      return sectors;
+    },
+    {} as Record<string, number>
+  );
+
+  const chartData: ChartData<"doughnut"> = {
+    datasets: [
+      {
+        label: "First Dataset",
+        data: Object.values(sectorData),
+        backgroundColor: BACKGROUND_COLORS,
+        borderColor: BORDER_COLORS,
+        borderWidth: 1,
+        hoverOffset: 4,
+      },
+    ],
+    labels: Object.keys(sectorData),
+  };
+
+  console.log(chartData);
   return chartData;
 }
