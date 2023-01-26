@@ -4,7 +4,7 @@ import { FC } from "react";
 import { StocksData } from "@/apis/exampleData";
 import { transformSectorData } from "@/utils/stockChart";
 import { DoughnutChart } from "@/components/base/DoughnutChart";
-import { LoadingAndError } from "@/components/base/LoadingAndError";
+import { Loader } from "@/components/base/Loader";
 
 // TODO: redundant data, refactor this
 const defaultOptions: ChartOptions<"doughnut"> = {
@@ -40,7 +40,7 @@ export const SectorChart: FC<Props> = ({ data, isLoading, error }) => {
   const chartData = isLoading || !data ? emptyData : transformSectorData(data);
 
   return (
-    <LoadingAndError
+    <Loader
       isLoading={isLoading}
       error={error}
       loadingText={LOADING_TEXT}
@@ -51,6 +51,6 @@ export const SectorChart: FC<Props> = ({ data, isLoading, error }) => {
         options={defaultOptions}
         className="p-5"
       />
-    </LoadingAndError>
+    </Loader>
   );
 };

@@ -3,7 +3,7 @@ import { ChartData, ChartOptions } from "chart.js";
 import { FC } from "react";
 import { StocksData } from "@/apis/exampleData";
 import { transformStockData } from "@/utils/stockChart";
-import { LoadingAndError } from "@/components/base/LoadingAndError";
+import { Loader } from "@/components/base/Loader";
 
 const defaultOptions: ChartOptions<"bar"> = {
   responsive: true,
@@ -51,17 +51,13 @@ export const StockChart: FC<Props> = ({ data, isLoading, error }) => {
   const chartData = isLoading || !data ? emptyData : transformStockData(data);
 
   return (
-    <LoadingAndError
+    <Loader
       isLoading={isLoading}
       error={error}
       loadingText={LOADING_TEXT}
       errorText={ERROR_TEXT}
     >
-      <BarChart
-        data={chartData}
-        options={defaultOptions}
-        title={TITLE}
-      />
-    </LoadingAndError>
+      <BarChart data={chartData} options={defaultOptions} title={TITLE} />
+    </Loader>
   );
 };
