@@ -30,7 +30,7 @@ export const Dashboard = () => {
         <h2 className="md:text-2xl font-medium text-center m-3">
           Stock Market Performance
         </h2>
-        <div className="basis-full px-4">
+        <div className="basis-full">
           <StockChart
             error={error}
             isLoading={isLoading || isValidating}

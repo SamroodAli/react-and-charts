@@ -62,7 +62,12 @@ export const StockChart: FC<Props> = ({ data, isLoading, error }) => {
       loadingText={LOADING_TEXT}
       errorText={ERROR_TEXT}
     >
-      <BarChart data={chartData} options={defaultOptions} title={TITLE} />
+      <BarChart
+        data={chartData}
+        options={defaultOptions}
+        title={TITLE}
+        className="p-5"
+      />
     </Loader>
   );
 };
