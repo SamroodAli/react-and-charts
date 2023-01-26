@@ -5,6 +5,10 @@ import { StocksData } from "@/apis/exampleData";
 import { transformStockData } from "@/utils/stockChart";
 import { Loader } from "@/components/base/Loader";
 
+const LOADING_TEXT = "Loading stock prices";
+const ERROR_TEXT = "Failed to load stock prices, retrying...";
+const TITLE = "Individual Stock Prices in Portfolio";
+
 const defaultOptions: ChartOptions<"bar"> = {
   responsive: true,
   backgroundColor: "red",
@@ -15,18 +19,21 @@ const defaultOptions: ChartOptions<"bar"> = {
     },
     title: {
       display: true,
+      text: TITLE,
     },
   },
   scales: {
-    x: {
-      title: {
-        text: "something awesome",
-      },
-    },
     y: {
       beginAtZero: true,
       title: {
-        text: "sss",
+        display: true,
+        text: "Price ( ₹ )",
+      },
+    },
+    x: {
+      title: {
+        display: true,
+        text: "Company ticker",
       },
     },
   },
@@ -47,10 +54,6 @@ interface Props {
   isLoading: boolean;
   error: boolean;
 }
-
-const LOADING_TEXT = "Loading stock prices";
-const ERROR_TEXT = "Failed to load stock prices, retrying...";
-const TITLE = "Stock Prices";
 
 export const StockChart: FC<Props> = ({ data, isLoading, error }) => {
   const chartData = isLoading || !data ? emptyData : transformStockData(data);

@@ -1,5 +1,5 @@
-import { ArcElement, Chart, Tooltip } from "chart.js";
+import { ArcElement, Chart, Tooltip, Title } from "chart.js";
 
-Chart.register(ArcElement, Tooltip);
+Chart.register(ArcElement, Tooltip, Title);
 
 export { Doughnut as DoughnutChart } from "react-chartjs-2";

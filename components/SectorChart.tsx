@@ -6,13 +6,21 @@ import { transformSectorData } from "@/utils/stockChart";
 import { DoughnutChart } from "@/components/base/DoughnutChart";
 import { Loader } from "@/components/base/Loader";
 
-// TODO: redundant data, refactor this
+const LOADING_TEXT = "Loading sector data";
+const ERROR_TEXT = "Failed to load sector data, retrying...";
+const TITLE = "Sector Breakdown of Stock Portfolio";
+
 const defaultOptions: ChartOptions<"doughnut"> = {
   responsive: true,
+  backgroundColor: "red",
   maintainAspectRatio: false,
   plugins: {
     legend: {
       display: false,
+    },
+    title: {
+      display: true,
+      text: TITLE,
     },
   },
 };
@@ -32,9 +40,6 @@ interface Props {
   isLoading: boolean;
   error: boolean;
 }
-
-const LOADING_TEXT = "Loading sector data";
-const ERROR_TEXT = "Failed to load sector data, retrying...";
 
 export const SectorChart: FC<Props> = ({ data, isLoading, error }) => {
   const chartData = isLoading || !data ? emptyData : transformSectorData(data);
