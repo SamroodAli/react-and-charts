@@ -4,24 +4,26 @@ import { StockChart } from "@/components/StockChart";
 import { useAPI } from "@/hooks/useAPI";
 
 export const Dashboard = () => {
-  const exampleData = useAPI(getExampleData);
+  const exampleData = useAPI("/example-data", getExampleData);
 
   return (
-    <div>
-      <header>
-        <h1 className="md:text-2xl">Dashboard</h1>
-      </header>
-      <main className="md:flex w-full justify-around">
-        <section className="w-full">
-          <h2>Stock data</h2>
+    <div className="grid grid-rows-2 h-full md:grid-rows-1 md:grid-cols-2 md:p-20">
+      <section className="flex flex-col flex-grow">
+        <h2 className="md:text-2xl font-medium text-center m-3">
+          Stock Market Performance
+        </h2>
+        <div className="basis-full px-4">
           <StockChart {...exampleData} />
-        </section>
-
-        <section className="p-8 md:w-1/2">
-          <h2>Sector data</h2>
+        </div>
+      </section>
+      <section className="flex flex-col flex-grow">
+        <h2 className="md:text-2xl font-medium text-center m-3">
+          Sector Performance Comparison
+        </h2>
+        <div className="basis-full">
           <SectorChart {...exampleData} />
-        </section>
-      </main>
+        </div>
+      </section>
     </div>
   );
 };

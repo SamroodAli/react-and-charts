@@ -9,6 +9,12 @@ import { LoadingAndError } from "@/components/base/LoadingAndError";
 // TODO: redundant data, refactor this
 const defaultOptions: ChartOptions<"doughnut"> = {
   responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
 };
 
 const emptyData: ChartData<"doughnut"> = {
@@ -31,10 +37,7 @@ const LOADING_TEXT = "Loading sector data";
 const ERROR_TEXT = "Failed to load sector data, please try again later";
 
 export const SectorChart: FC<Props> = ({ data, isLoading, error }) => {
-  // TODO: memoize data since there's only two datasets
   const chartData = isLoading || !data ? emptyData : transformSectorData(data);
-
-  // TODO: add label in chart
 
   return (
     <LoadingAndError
@@ -43,7 +46,11 @@ export const SectorChart: FC<Props> = ({ data, isLoading, error }) => {
       loadingText={LOADING_TEXT}
       errorText={ERROR_TEXT}
     >
-      <DoughnutChart data={chartData} options={defaultOptions} />;
+      <DoughnutChart
+        data={chartData}
+        options={defaultOptions}
+        className="p-5"
+      />
     </LoadingAndError>
   );
 };

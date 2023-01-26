@@ -1,8 +1,34 @@
-import { PageLayout } from "@/components/layouts/PageLayouts";
-import Head from "next/head";
+import { InferGetStaticPropsType } from "next";
+import { DashboardLayout } from "@/components/layouts/DashboardLayouts";
 import { Dashboard } from "@/components/Dashboard";
+import Head from "next/head";
+import { SWRConfig } from "swr/_internal";
+import { getExampleData } from "@/apis/exampleData";
 
-export default function Home() {
+export async function getStaticProps() {
+  let data;
+
+  try {
+    data = await getExampleData();
+  } catch {
+    data = {
+      stocks: [],
+      dataset: 0,
+    };
+  }
+
+  return {
+    props: {
+      fallback: {
+        "/example-data": data,
+      },
+    },
+  };
+}
+
+export default function Home({
+  fallback,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Head>
@@ -11,11 +37,11 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <PageLayout>
-        <Dashboard />
-      </PageLayout>
+      <SWRConfig value={{ fallback }}>
+        <DashboardLayout>
+          <Dashboard />
+        </DashboardLayout>
+      </SWRConfig>
     </>
   );
 }
-
-//TODO: server side render this page

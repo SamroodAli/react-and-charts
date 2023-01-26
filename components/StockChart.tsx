@@ -8,14 +8,21 @@ import { LoadingAndError } from "@/components/base/LoadingAndError";
 const defaultOptions: ChartOptions<"bar"> = {
   responsive: true,
   backgroundColor: "red",
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       display: false,
+    },
+    title: {
+      display: true,
     },
   },
   scales: {
     y: {
       beginAtZero: true,
+      title: {
+        text: "sss",
+      },
     },
   },
 };
@@ -38,12 +45,10 @@ interface Props {
 
 const LOADING_TEXT = "Loading stock prices";
 const ERROR_TEXT = "Failed to load stock prices, please try again later";
+const TITLE = "Stock Prices";
 
 export const StockChart: FC<Props> = ({ data, isLoading, error }) => {
-  // TODO: memoize data since there's only two datasets
   const chartData = isLoading || !data ? emptyData : transformStockData(data);
-
-  // TODO: add label in chart
 
   return (
     <LoadingAndError
@@ -52,7 +57,11 @@ export const StockChart: FC<Props> = ({ data, isLoading, error }) => {
       loadingText={LOADING_TEXT}
       errorText={ERROR_TEXT}
     >
-      <BarChart data={chartData} options={defaultOptions} />
+      <BarChart
+        data={chartData}
+        options={defaultOptions}
+        title={TITLE}
+      />
     </LoadingAndError>
   );
 };
