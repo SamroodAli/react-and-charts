@@ -18,6 +18,11 @@ const defaultOptions: ChartOptions<"bar"> = {
     },
   },
   scales: {
+    x: {
+      title: {
+        text: "something awesome",
+      },
+    },
     y: {
       beginAtZero: true,
       title: {
@@ -44,7 +49,7 @@ interface Props {
 }
 
 const LOADING_TEXT = "Loading stock prices";
-const ERROR_TEXT = "Failed to load stock prices, please try again later";
+const ERROR_TEXT = "Failed to load stock prices, retrying...";
 const TITLE = "Stock Prices";
 
 export const StockChart: FC<Props> = ({ data, isLoading, error }) => {

@@ -34,7 +34,7 @@ interface Props {
 }
 
 const LOADING_TEXT = "Loading sector data";
-const ERROR_TEXT = "Failed to load sector data, please try again later";
+const ERROR_TEXT = "Failed to load sector data, retrying...";
 
 export const SectorChart: FC<Props> = ({ data, isLoading, error }) => {
   const chartData = isLoading || !data ? emptyData : transformSectorData(data);

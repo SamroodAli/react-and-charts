@@ -28,7 +28,10 @@ export const Loader: FC<Props> = ({
       )}
       {error && (
         <div className="absolute top-0 left-0 h-full w-full flex items-center justify-center bg-red-500 text-white">
-          {errorText}
+          <div>
+            <p className="mb-4">{errorText}</p>
+            <div className="h-8 w-8 mx-auto rounded-full border-t-8 border-gray-900 border-opacity-25 animate-spin"></div>
+          </div>
         </div>
       )}
     </div>
