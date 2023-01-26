@@ -1,24 +1,14 @@
-import { BarChart } from "@/components/BarChart";
+import { BarChart } from "@/components/base/BarChart";
 import { ChartData, ChartOptions } from "chart.js";
 import { FC } from "react";
 import { StocksData } from "@/apis/exampleData";
 import { transformSectorData } from "@/utils/stockChart";
-import { DoughnutChart } from "@/components/DoughnutChart";
+import { DoughnutChart } from "@/components/base/DoughnutChart";
+import { LoadingAndError } from "@/components/base/LoadingAndError";
 
 // TODO: redundant data, refactor this
 const defaultOptions: ChartOptions<"doughnut"> = {
   responsive: true,
-  backgroundColor: "red",
-  plugins: {
-    legend: {
-      display: false,
-    },
-  },
-  scales: {
-    y: {
-      beginAtZero: true,
-    },
-  },
 };
 
 const emptyData: ChartData<"doughnut"> = {
@@ -37,11 +27,23 @@ interface Props {
   error: boolean;
 }
 
+const LOADING_TEXT = "Loading sector data";
+const ERROR_TEXT = "Failed to load sector data, please try again later";
+
 export const SectorChart: FC<Props> = ({ data, isLoading, error }) => {
   // TODO: memoize data since there's only two datasets
   const chartData = isLoading || !data ? emptyData : transformSectorData(data);
 
   // TODO: add label in chart
-  //TODO: handle error
-  return <DoughnutChart data={chartData} options={defaultOptions} />;
+
+  return (
+    <LoadingAndError
+      isLoading={isLoading}
+      error={error}
+      loadingText={LOADING_TEXT}
+      errorText={ERROR_TEXT}
+    >
+      <DoughnutChart data={chartData} options={defaultOptions} />;
+    </LoadingAndError>
+  );
 };

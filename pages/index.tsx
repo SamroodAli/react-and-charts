@@ -1,4 +1,4 @@
-import { PageLayout } from "@/components/PageLayouts";
+import { PageLayout } from "@/components/layouts/PageLayouts";
 import Head from "next/head";
 import { Dashboard } from "@/components/Dashboard";
 

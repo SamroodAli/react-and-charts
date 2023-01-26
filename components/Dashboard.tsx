@@ -17,7 +17,7 @@ export const Dashboard = () => {
           <StockChart {...exampleData} />
         </section>
 
-        <section className="w-full">
+        <section className="p-8 md:w-1/2">
           <h2>Sector data</h2>
           <SectorChart {...exampleData} />
         </section>

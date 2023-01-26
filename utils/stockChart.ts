@@ -29,7 +29,7 @@ export function transformStockData(stocksData: StocksData): ChartData<"bar"> {
   const chartData: ChartData<"bar"> = {
     datasets: [
       {
-        label: "First Dataset",
+        label: `${stocksData.dataset ? "First" : "Second"} Dataset`,
         data: stocksData.stocks.map((stock) => stock.price),
         backgroundColor: BACKGROUND_COLORS,
         borderColor: BORDER_COLORS,
@@ -62,7 +62,7 @@ export function transformSectorData(
   const chartData: ChartData<"doughnut"> = {
     datasets: [
       {
-        label: "First Dataset",
+        label: `${stocksData.dataset ? "First" : "Second"} Dataset`,
         data: Object.values(sectorData),
         backgroundColor: BACKGROUND_COLORS,
         borderColor: BORDER_COLORS,
@@ -73,6 +73,5 @@ export function transformSectorData(
     labels: Object.keys(sectorData),
   };
 
-  console.log(chartData);
   return chartData;
 }
