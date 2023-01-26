@@ -1,6 +1,6 @@
 # Stock Portfolio Dashboard
 
-This is a simple dashboard built using NextJS and TypeScript that displays a Pie Chart and a Bar Graph of a user's stock portfolio. The data is fetched from an API (https://contrahacker.com/api/example-data) and is displayed using react-chartjs-2.
+This is a simple dashboard built using NextJS and TypeScript that displays a Pie Chart and a Bar Graph of a user's stock portfolio. The data is fetched from an [API](https://contrahacker.com/api/example-data) and is displayed using react-chartjs-2.
 
 ## Deployment
 
